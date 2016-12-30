@@ -51,8 +51,6 @@
         'edittd':'~/dialogs/table/edittd.html',
         'webapp':'~/dialogs/webapp/webapp.html',
         'snapscreen':'~/dialogs/snapscreen/snapscreen.html',
-        'scrawl':'~/dialogs/scrawl/scrawl.html',
-        'music':'~/dialogs/music/music.html',
         'template':'~/dialogs/template/template.html',
         'background':'~/dialogs/background/background.html',
         'charts': '~/dialogs/charts/charts.html'
@@ -180,10 +178,11 @@
     }
 
 
+    // 需要弹窗的按钮
     var dialogBtns = {
         noOk:['searchreplace', 'help', 'spechars', 'webapp','preview'],
         ok:['attachment', 'anchor', 'link', 'insertimage', 'map', 'gmap', 'insertframe', 'wordimage',
-            'insertvideo', 'insertframe', 'edittip', 'edittable', 'edittd', 'scrawl', 'template', 'music', 'background', 'charts']
+            'insertvideo', 'insertframe', 'edittip', 'edittable', 'edittd', 'template', 'background', 'charts']
     };
 
     for (var p in dialogBtns) {
@@ -238,30 +237,14 @@
                             title:title,
                             onclick:function () {
                                 if (dialog) {
-                                    switch (cmd) {
-                                        case "wordimage":
-                                            var images = editor.execCommand("wordimage");
-                                            if (images && images.length) {
-                                                dialog.render();
-                                                dialog.open();
-                                            }
-                                            break;
-                                        case "scrawl":
-                                            if (editor.queryCommandState("scrawl") != -1) {
-                                                dialog.render();
-                                                dialog.open();
-                                            }
-
-                                            break;
-                                        default:
-                                            dialog.render();
-                                            dialog.open();
-                                    }
+                                    dialog.render();
+                                    dialog.open();
                                 }
                             },
                             theme:editor.options.theme,
-                            disabled:(cmd == 'scrawl' && editor.queryCommandState("scrawl") == -1) || ( cmd == 'charts' )
+                            disabled:false
                         });
+
                         editorui.buttons[cmd] = ui;
                         editor.addListener('selectionchange', function () {
                             //只存在于右键菜单而无工具栏按钮的ui不需要检测状态

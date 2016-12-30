@@ -17,7 +17,7 @@ UE.I18N['zh-cn'] = {
         'splittocols':'拆分成列', 'splittocells':'完全拆分单元格','deletecaption':'删除表格标题','inserttitle':'插入标题',
         'mergecells':'合并多个单元格', 'deletetable':'删除表格', 'cleardoc':'清空文档','insertparagraphbeforetable':"表格前插入行",'insertcode':'代码语言',
         'fontfamily':'字体', 'fontsize':'字号', 'paragraph':'段落格式', 'simpleupload':'单图上传', 'insertimage':'多图上传','edittable':'表格属性','edittd':'单元格属性', 'link':'超链接',
-        'emotion':'表情', 'spechars':'特殊字符', 'searchreplace':'查询替换', 'map':'Baidu地图', 'gmap':'Google地图',
+        'emotion':'表情', 'spechars':'特殊字符', 'searchreplace':'查询替换',
         'insertvideo':'视频', 'help':'帮助', 'justifyleft':'居左对齐', 'justifyright':'居右对齐', 'justifycenter':'居中对齐',
         'justifyjustify':'两端对齐', 'forecolor':'字体颜色', 'backcolor':'背景色', 'insertorderedlist':'有序列表',
         'insertunorderedlist':'无序列表', 'fullscreen':'全屏', 'directionalityltr':'从左向右输入', 'directionalityrtl':'从右向左输入',
@@ -25,7 +25,7 @@ UE.I18N['zh-cn'] = {
         'imageleft':'左浮动', 'imageright':'右浮动', 'attachment':'附件', 'imagecenter':'居中', 'wordimage':'图片转存',
         'lineheight':'行间距','edittip' :'编辑提示','customstyle':'自定义标题', 'autotypeset':'自动排版',
         'webapp':'百度应用','touppercase':'字母大写', 'tolowercase':'字母小写','background':'背景','template':'模板','scrawl':'涂鸦',
-        'music':'音乐','inserttable':'插入表格','drafts': '从草稿箱加载', 'charts': '图表'
+        'inserttable':'插入表格','drafts': '从草稿箱加载', 'charts': '图表'
     },
     'insertorderedlist':{
         'num':'1,2,3...',
@@ -443,35 +443,6 @@ UE.I18N['zh-cn'] = {
         'resume':"个人简历",
         'richText':"图文混排",
         'sciPapers':"科技论文"
-
-
-    },
-    'scrawl':{
-        'static':{
-            'lang_input_previousStep':"上一步",
-            'lang_input_nextsStep':"下一步",
-            'lang_input_clear':'清空',
-            'lang_input_addPic':'添加背景',
-            'lang_input_ScalePic':'缩放背景',
-            'lang_input_removePic':'删除背景',
-            'J_imgTxt':{title:'添加背景图片'}
-        },
-        'noScarwl':"尚未作画，白纸一张~",
-        'scrawlUpLoading':"涂鸦上传中,别急哦~",
-        'continueBtn':"继续",
-        'imageError':"糟糕，图片读取失败了！",
-        'backgroundUploading':'背景图片上传中,别急哦~'
-    },
-    'music':{
-        'static':{
-            'lang_input_tips':"输入歌手/歌曲/专辑，搜索您感兴趣的音乐！",
-            'J_searchBtn':{value:'搜索歌曲'}
-        },
-        'emptyTxt':'未搜索到相关音乐结果，请换一个关键词试试。',
-        'chapter':'歌曲',
-        'singer':'歌手',
-        'special':'专辑',
-        'listenTest':'试听'
     },
     'anchor':{
         'static':{
