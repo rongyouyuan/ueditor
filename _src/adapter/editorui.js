@@ -37,12 +37,7 @@
         'link':'~/dialogs/link/link.html',
         'spechars':'~/dialogs/spechars/spechars.html',
         'searchreplace':'~/dialogs/searchreplace/searchreplace.html',
-        'map':'~/dialogs/map/map.html',
-        'gmap':'~/dialogs/gmap/gmap.html',
-        'insertvideo':'~/dialogs/video/video.html',
-        'help':'~/dialogs/help/help.html',
         'preview':'~/dialogs/preview/preview.html',
-        'emotion':'~/dialogs/emotion/emotion.html',
         'wordimage':'~/dialogs/wordimage/wordimage.html',
         'attachment':'~/dialogs/attachment/attachment.html',
         'insertframe':'~/dialogs/insertframe/insertframe.html',
@@ -94,25 +89,6 @@
             };
         }(ci);
     }
-
-    //清除文档
-    editorui.cleardoc = function (editor) {
-        var ui = new editorui.Button({
-            className:'edui-for-cleardoc',
-            title:editor.options.labelMap.cleardoc || editor.getLang("labelMap.cleardoc") || '',
-            theme:editor.options.theme,
-            onclick:function () {
-                if (confirm(editor.getLang("confirmClear"))) {
-                    editor.execCommand('cleardoc');
-                }
-            }
-        });
-        editorui.buttons["cleardoc"] = ui;
-        editor.addListener('selectionchange', function () {
-            ui.setDisabled(editor.queryCommandState('cleardoc') == -1);
-        });
-        return ui;
-    };
 
     //排版，图片排版，文字方向
     var typeset = {
@@ -180,9 +156,8 @@
 
     // 需要弹窗的按钮
     var dialogBtns = {
-        noOk:['searchreplace', 'help', 'spechars', 'webapp','preview'],
-        ok:['attachment', 'anchor', 'link', 'insertimage', 'map', 'gmap', 'insertframe', 'wordimage',
-            'insertvideo', 'insertframe', 'edittip', 'edittable', 'edittd', 'template', 'background', 'charts']
+        noOk:['searchreplace','spechars', 'webapp','preview'],
+        ok:['attachment', 'anchor', 'link', 'insertimage', 'insertframe', 'wordimage', 'insertframe', 'edittip', 'edittable', 'edittd', 'template', 'background', 'charts']
     };
 
     for (var p in dialogBtns) {
@@ -314,68 +289,6 @@
         return ui;
     };
 
-    editorui.insertcode = function (editor, list, title) {
-        list = editor.options['insertcode'] || [];
-        title = editor.options.labelMap['insertcode'] || editor.getLang("labelMap.insertcode") || '';
-       // if (!list.length) return;
-        var items = [];
-        utils.each(list,function(key,val){
-            items.push({
-                label:key,
-                value:val,
-                theme:editor.options.theme,
-                renderLabelHtml:function () {
-                    return '<div class="edui-label %%-label" >' + (this.label || '') + '</div>';
-                }
-            });
-        });
-
-        var ui = new editorui.Combox({
-            editor:editor,
-            items:items,
-            onselect:function (t, index) {
-                editor.execCommand('insertcode', this.items[index].value);
-            },
-            onbuttonclick:function () {
-                this.showPopup();
-            },
-            title:title,
-            initValue:title,
-            className:'edui-for-insertcode',
-            indexByValue:function (value) {
-                if (value) {
-                    for (var i = 0, ci; ci = this.items[i]; i++) {
-                        if (ci.value.indexOf(value) != -1)
-                            return i;
-                    }
-                }
-
-                return -1;
-            }
-        });
-        editorui.buttons['insertcode'] = ui;
-        editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
-            if (!uiReady) {
-                var state = editor.queryCommandState('insertcode');
-                if (state == -1) {
-                    ui.setDisabled(true);
-                } else {
-                    ui.setDisabled(false);
-                    var value = editor.queryCommandValue('insertcode');
-                    if(!value){
-                        ui.setValue(title);
-                        return;
-                    }
-                    //trace:1871 ie下从源码模式切换回来时，字体会带单引号，而且会有逗号
-                    value && (value = value.replace(/['"]/g, '').split(',')[0]);
-                    ui.setValue(value);
-
-                }
-            }
-
-        });
-        return ui;
-    };
     editorui.fontfamily = function (editor, list, title) {
 
         list = editor.options['fontfamily'] || [];
@@ -766,23 +679,6 @@
             var state = editor.queryCommandState('fullscreen');
             ui.setDisabled(state == -1);
             ui.setChecked(editor.ui.isFullScreen());
-        });
-        return ui;
-    };
-
-    // 表情
-    editorui["emotion"] = function (editor, iframeUrl) {
-        var cmd = "emotion";
-        var ui = new editorui.MultiMenuPop({
-            title:editor.options.labelMap[cmd] || editor.getLang("labelMap." + cmd + "") || '',
-            editor:editor,
-            className:'edui-for-' + cmd,
-            iframeUrl:editor.ui.mapUrl(iframeUrl || (editor.options.iframeUrlMap || {})[cmd] || iframeUrlMap[cmd])
-        });
-        editorui.buttons[cmd] = ui;
-
-        editor.addListener('selectionchange', function () {
-            ui.setDisabled(editor.queryCommandState(cmd) == -1)
         });
         return ui;
     };

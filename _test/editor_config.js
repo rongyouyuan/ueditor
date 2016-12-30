@@ -68,7 +68,6 @@ var UEDITOR_CONFIG2 = {
         'map': 'Baidu地图',
         'gmap': 'Google地图',
         'video': '视频',
-        'help': '帮助',
         'justifyleft':'居左对齐',
         'justifyright':'居右对齐',
         'justifycenter':'居中对齐',

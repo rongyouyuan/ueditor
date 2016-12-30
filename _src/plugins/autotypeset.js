@@ -169,7 +169,8 @@ UE.plugins['autotypeset'] = function(){
             }
 
             //表情不处理
-            if(opt.imageBlockLine && ci.tagName.toLowerCase() == 'img' && !ci.getAttribute('emotion')){
+             // if(opt.imageBlockLine && ci.tagName.toLowerCase() == 'img' && !ci.getAttribute('emotion')){
+            if(opt.imageBlockLine && ci.tagName.toLowerCase() == 'img'){
                 if(html){
                     var img = ci;
                     switch (opt.imageBlockLine){
