@@ -63,7 +63,6 @@ var UEDITOR_CONFIG2 = {
         'inserttable': '表格',
         'link': '超链接',
         'emoticon': '表情',
-        'spechars': '特殊字符',
         'searchreplace': '查询替换',
         'map': 'Baidu地图',
         'gmap': 'Google地图',
@@ -86,7 +85,6 @@ var UEDITOR_CONFIG2 = {
     iframeUrlMap: {
         'anchor': '~/dialogs/anchor/anchor.html',
         'image': '~/dialogs/image/image.html',
-        'inserttable': '~/dialogs/table/table.html',
         'link': '~/dialogs/link/link.html',
         'emoticon': '~/dialogs/emoticon/emoticon.html',
         'spechars': '~/dialogs/spechars/spechars.html',

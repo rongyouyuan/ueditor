@@ -35,29 +35,18 @@
         'anchor':'~/dialogs/anchor/anchor.html',
         'insertimage':'~/dialogs/image/image.html',
         'link':'~/dialogs/link/link.html',
-        'spechars':'~/dialogs/spechars/spechars.html',
-        'searchreplace':'~/dialogs/searchreplace/searchreplace.html',
         'preview':'~/dialogs/preview/preview.html',
-        'wordimage':'~/dialogs/wordimage/wordimage.html',
         'attachment':'~/dialogs/attachment/attachment.html',
-        'insertframe':'~/dialogs/insertframe/insertframe.html',
         'edittip':'~/dialogs/table/edittip.html',
         'edittable':'~/dialogs/table/edittable.html',
         'edittd':'~/dialogs/table/edittd.html',
-        'webapp':'~/dialogs/webapp/webapp.html',
-        'snapscreen':'~/dialogs/snapscreen/snapscreen.html',
-        'template':'~/dialogs/template/template.html',
-        'background':'~/dialogs/background/background.html',
-        'charts': '~/dialogs/charts/charts.html'
     };
     //为工具栏添加按钮，以下都是统一的按钮触发命令，所以写在一起
     var btnCmds = ['undo', 'redo', 'formatmatch',
         'bold', 'italic', 'underline', 'fontborder', 'touppercase', 'tolowercase',
         'strikethrough', 'subscript', 'superscript', 'source', 'indent', 'outdent',
-        'blockquote', 'pasteplain', 'pagebreak',
-        'selectall', 'print','horizontal', 'removeformat', 'time', 'date', 'unlink',
-        'insertparagraphbeforetable', 'insertrow', 'insertcol', 'mergeright', 'mergedown', 'deleterow',
-        'deletecol', 'splittorows', 'splittocols', 'splittocells', 'mergecells', 'deletetable', 'drafts'];
+        'blockquote', 'pasteplain',
+        'selectall','horizontal', 'removeformat', 'time', 'date', 'unlink'];
 
     for (var i = 0, ci; ci = btnCmds[i++];) {
         ci = ci.toLowerCase();
@@ -156,17 +145,14 @@
 
     // 需要弹窗的按钮
     var dialogBtns = {
-        noOk:['searchreplace','spechars', 'webapp','preview'],
-        ok:['attachment', 'anchor', 'link', 'insertimage', 'insertframe', 'wordimage', 'insertframe', 'edittip', 'edittable', 'edittd', 'template', 'background', 'charts']
+        noOk:[],
+        ok:['attachment', 'anchor', 'link', 'insertimage', 'edittip', 'edittable', 'edittd']
     };
 
     for (var p in dialogBtns) {
         (function (type, vals) {
             for (var i = 0, ci; ci = vals[i++];) {
-                //todo opera下存在问题
-                if (browser.opera && ci === "searchreplace") {
-                    continue;
-                }
+
                 (function (cmd) {
                     editorui[cmd] = function (editor, iframeUrl, title) {
                         iframeUrl = iframeUrl || (editor.options.iframeUrlMap || {})[cmd] || iframeUrlMap[cmd];
@@ -240,54 +226,6 @@
             }
         })(p, dialogBtns[p]);
     }
-
-    editorui.snapscreen = function (editor, iframeUrl, title) {
-        title = editor.options.labelMap['snapscreen'] || editor.getLang("labelMap.snapscreen") || '';
-        var ui = new editorui.Button({
-            className:'edui-for-snapscreen',
-            title:title,
-            onclick:function () {
-                editor.execCommand("snapscreen");
-            },
-            theme:editor.options.theme
-
-        });
-        editorui.buttons['snapscreen'] = ui;
-        iframeUrl = iframeUrl || (editor.options.iframeUrlMap || {})["snapscreen"] || iframeUrlMap["snapscreen"];
-        if (iframeUrl) {
-            var dialog = new editorui.Dialog({
-                iframeUrl:editor.ui.mapUrl(iframeUrl),
-                editor:editor,
-                className:'edui-for-snapscreen',
-                title:title,
-                buttons:[
-                    {
-                        className:'edui-okbutton',
-                        label:editor.getLang("ok"),
-                        editor:editor,
-                        onclick:function () {
-                            dialog.close(true);
-                        }
-                    },
-                    {
-                        className:'edui-cancelbutton',
-                        label:editor.getLang("cancel"),
-                        editor:editor,
-                        onclick:function () {
-                            dialog.close(false);
-                        }
-                    }
-                ]
-
-            });
-            dialog.render();
-            editor.ui._dialogs["snapscreenDialog"] = dialog;
-        }
-        editor.addListener('selectionchange', function () {
-            ui.setDisabled(editor.queryCommandState('snapscreen') == -1);
-        });
-        return ui;
-    };
 
     editorui.fontfamily = function (editor, list, title) {
 
@@ -513,25 +451,6 @@
                 }
             }
 
-        });
-        return ui;
-    };
-    editorui.inserttable = function (editor, iframeUrl, title) {
-        title = editor.options.labelMap['inserttable'] || editor.getLang("labelMap.inserttable") || '';
-        var ui = new editorui.TableButton({
-            editor:editor,
-            title:title,
-            className:'edui-for-inserttable',
-            onpicktable:function (t, numCols, numRows) {
-                editor.execCommand('InsertTable', {numRows:numRows, numCols:numCols, border:1});
-            },
-            onbuttonclick:function () {
-                this.showPopup();
-            }
-        });
-        editorui.buttons['inserttable'] = ui;
-        editor.addListener('selectionchange', function () {
-            ui.setDisabled(editor.queryCommandState('inserttable') == -1);
         });
         return ui;
     };
